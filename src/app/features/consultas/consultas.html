@@ -1,0 +1,75 @@
+
+<app-hero
+    titulo="Consulta Clínica"
+    subtitulo="Excelencia médica al bienestar de quienes más amas."
+    descripcion="Consultas que salvan vidas. Evaluaciones completas para detectar a tiempo cualquier problema y garantizar su bienestar total."
+    imagen="https://www.blogdeasisa.es/wp-content/uploads/2023/08/Consultas-veterinarias.png"
+    enano="Salvamos vidas"
+    item1="Aquí rescatamos vidas de quien amamos"
+    enano2="Contamos con los mejores"
+    item2="Somos profesionales y amamos lo que hacemos"
+></app-hero>
+<app-portfolio
+    titulo="Casos de Éxito en Consulta"
+    descripcion="Evaluaciones que marcan la diferencia. Estos son algunos de nuestros pacientes que hoy disfrutan de una salud plena gracias a sus chequeos preventivos."
+    
+    subtitulo1="Diagnóstico Temprano"
+    subtitulo11="Detección de patologías en etapas iniciales"
+    imagen1="https://4dmedica.ai/wp-content/uploads/2024/10/ecografia-cardiaca-veterinaria.png"
+    
+    subtitulo2="Planes Preventivos"
+    subtitulo22="Esquemas de vacunación y desparasitación"
+    imagen2="https://www.premiervetalliance.com/_next/image?url=https%3A%2F%2Fadmin.premiervetalliance.com%2Fstorage%2Fnewspage-news%2FMarch2025%2FgQRhX9NPXobn1sTdBWCz.png&w=1920&q=75"
+    
+    subtitulo3="Control de Peso"
+    subtitulo33="Nutrición especializada para cada etapa"
+    imagen3="https://www.animalshealth.es/fileuploads/news/nueva-web-hills-peso-mascotas-ruleta-mesa-de-trabajo-216728494061.png"
+    
+    subtitulo4="Evaluación Geriátrica"
+    subtitulo44="Cuidado experto para pacientes senior"
+    imagen4="https://images.squarespace-cdn.com/content/v1/57a2aeb1ff7c509ef76566c9/1561346731177-A7AND7BUAONZOHVXMDUA/BLOG-1.jpg"
+>
+</app-portfolio>
+
+<div class="p-6 bg-gray-50 min-h-screen">
+    <h2 class="text-3xl font-extrabold text-gray-800 mb-6 text-center">Panel de Consultas</h2>
+
+    <div
+        class="max-w-2xl mx-auto mb-6 p-4 bg-blue-100 border-l-4 border-blue-500 text-blue-700 shadow-sm animate-bounce">
+        <p class="font-medium">{{mensajeActivo}}</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-xl shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-700 mb-4 border-b pb-2">Pacientes en Espera</h3>
+            <ul class="space-y-3">
+                @for (mascota of mascotas; track mascota.id) {
+                <li (click)="verDetalles(mascota)"
+                    class="flex justify-between items-center p-3 hover:bg-indigo-50 border rounded-lg cursor-pointer transition-colors group">
+                    <span class="text-gray-700 font-medium group-hover:text-indigo-600">{{mascota.nombre}}</span>
+                    <span class="text-xs bg-indigo-100 text-indigo-600 px-2 py-1 rounded-full uppercase font-bold">Ver
+                        Ficha</span>
+                </li>
+            }
+            </ul>
+        </div>
+
+        <div class="flex flex-col">
+            @if (mascotaSeleccionada) {
+                <!--Llamamos al componente hijo-->
+                <app-detalle-mascota
+                    [mascota]="mascotaSeleccionada"
+                    (notificarAccion)="procesarAviso($event)"
+                    >
+                </app-detalle-mascota>
+            }@else{
+
+            <div
+                class="h-full border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center p-10 text-gray-400">
+                <p class="text-center italic">Selecciona un paciente para ver su historial médico</p>
+            </div>
+        }
+        </div>
+    </div>
+
+</div>
