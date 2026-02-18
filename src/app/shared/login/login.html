@@ -1,0 +1,45 @@
+<br>
+<section class="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+    <div class="max-w-md w-full bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
+        
+        <div class="bg-teal-600 p-8 text-center">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-white rounded-full mb-4 shadow-sm">
+                <svg class="w-8 h-8 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                </svg>
+            </div>
+            <h2 class="text-2xl font-bold text-white">Iniciar Sesión</h2>
+            <p class="text-teal-100 mt-2">Accede al portal de Visual</p>
+        </div>
+
+        <div class="p-8 space-y-6">
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Usuario / Email</label>
+                <input [(ngModel)]="email" type="email" name="email" placeholder="admin@visual-vet.com" 
+                    class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm
+                    focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700">Contraseña</label>
+                <input [(ngModel)]="password" type="password" name="password" placeholder="••••••••" 
+                    class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm
+                    focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all">
+            </div>
+
+            <button (click)="iniciarSesion()" type="submit" 
+                class="w-full py-3 px-4 bg-slate-900 hover:bg-teal-600 text-white font-semibold rounded-xl shadow-lg transform transition-all active:scale-95">
+                iniciar Sesión
+            </button>
+
+            <button (click)="cerrarSesion()" type="submit" 
+                class="w-full py-3 px-4 bg-slate-900 hover:bg-teal-600 text-white font-semibold rounded-xl shadow-lg transform transition-all active:scale-95">
+                Cerrar Sesión
+            </button>
+
+            <div class="text-center">
+                <a href="#" class="text-sm text-teal-600 font-medium hover:underline">¿Olvidaste tu contraseña?</a>
+            </div>
+        </div>
+    </div>
+</section>
