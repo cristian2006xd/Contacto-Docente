@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { UsuarioService } from '../../services/usuario-service';
 import { Usuario } from '../../models/usuario';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'app-formulario',
@@ -13,6 +14,8 @@ export class Formulario {
 
   private servicioUsuario = inject(UsuarioService);
 
+  public servicioAuth = inject(AuthService);
+
   listaUsuarios = signal<Usuario[]>([]);
 
   editando = false;
@@ -20,7 +23,9 @@ export class Formulario {
   nuevoUsuario: Usuario = {
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    password: '',
+    rol: 'EMPLEADO'
   };
 
   ngOnInit() {
@@ -68,7 +73,7 @@ export class Formulario {
   //Método para limpiar el formulario
   resetear() {
     this.editando = false;
-    this.nuevoUsuario = { name: '', email: '', phone: '' }
+    this.nuevoUsuario = { name: '', email: '', phone: '', password: '', rol: 'EMPLEADO' }
   }
 }
 

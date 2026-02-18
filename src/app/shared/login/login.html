@@ -1,5 +1,5 @@
 <br>
-<section class="min-h-screen bg-gray-50 flex items-center justify-center p-6">
+<form (ngSubmit)="iniciarSesion()" class="min-h-screen bg-gray-50 flex items-center justify-center p-6">
     <div class="max-w-md w-full bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100">
         
         <div class="bg-teal-600 p-8 text-center">
@@ -27,12 +27,12 @@
                     focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all">
             </div>
 
-            <button (click)="iniciarSesion()" type="submit" 
+            <button type="submit" 
                 class="w-full py-3 px-4 bg-slate-900 hover:bg-teal-600 text-white font-semibold rounded-xl shadow-lg transform transition-all active:scale-95">
                 iniciar Sesión
             </button>
 
-            <button (click)="cerrarSesion()" type="submit" 
+            <button (click)="cerrarSesion()" type="button" 
                 class="w-full py-3 px-4 bg-slate-900 hover:bg-teal-600 text-white font-semibold rounded-xl shadow-lg transform transition-all active:scale-95">
                 Cerrar Sesión
             </button>
@@ -42,4 +42,4 @@
             </div>
         </div>
     </div>
-</section>
+</form>

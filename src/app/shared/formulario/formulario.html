@@ -16,6 +16,9 @@
             <input [(ngModel)]="nuevoUsuario.phone" name="phone" type="text" placeholder="Teléfono" required
                 class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
 
+            <input [(ngModel)]="nuevoUsuario.password" name="password" type="password" placeholder="Contraseña" required
+                class="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all">
+
             <button type="submit"
                 class="md:col-span-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition-colors shadow-lg shadow-indigo-200">
                 {{editando ? 'Actualizar Usuario' : 'Registrar Usuario'}}
@@ -40,21 +43,25 @@
 
                 <tr class="border-b border-slate-100 hover:bg-indigo-50 transition-colors">
                     <td class="p-4 text-slate-500 font-mono text-xs">
+                        @if (servicioAuth.rolActual()==='ADMIN') {
                         <button (click)="seleccionarParaEditar(usuario)" class="pr-6">✏️​</button>
                         <button (click)="eliminarUsuario(usuario.id!)">🗑️​</button>
+                        }@else {
+                            <span>🔒​</span>
+                        }
                     </td>
                     <td class="p-4 text-slate-500 font-mono text-xs">{{usuario.id}}</td>
                     <td class="p-4 text-slate-800 font-medium">{{usuario.name}}</td>
                     <td class="p-4 text-slate-600">{{usuario.email}}</td>
                     <td class="p-4 text-slate-600">{{usuario.phone}}</td>
                 </tr>
-            }@empty {
+                }@empty {
                 <tr>
                     <td colspan="4" class="p-8 text-center text-slate-400 italic">
                         Cargando usuarios desde la API...
                     </td>
                 </tr>
-            }
+                }
             </tbody>
         </table>
     </div>
