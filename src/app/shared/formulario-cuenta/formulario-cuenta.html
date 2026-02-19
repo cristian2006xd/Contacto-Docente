@@ -39,32 +39,11 @@
                 }
             </div>
 
-            <div>
-                <label class="block text-sm font-medium text-gray-700">Confirmar Contraseña</label>
-                <input formControlName="repeatPassword" type="password" placeholder="••••••••" class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm shadow-sm placeholder-gray-400
-                    focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all">
-                    @if (formCuenta.hasError('noCoinciden') && formCuenta.get('repeatPassword')?.touched) {
-                    <p class="mt-2 text-sm text-red-600"> 
-                        La contraseña no coincide 
-                    </p>
-                }
-            </div>
-
-            <div class="flex items-center">
-                <input type="checkbox" class="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded">
-                <label class="ml-2 block text-xs text-gray-600">
-                    Acepto los términos y condiciones de salud animal.
-                </label>
-            </div>
-
             <button [disabled]="formCuenta.invalid" type="submit"
                 class="w-full py-3 px-4 bg-slate-900 hover:bg-teal-600 text-white font-semibold rounded-xl shadow-lg transform transition-all active:scale-95">
-                Crear mi Cuenta
+                Enviar Comentario
             </button>
 
-            <p class="text-center text-sm text-gray-500 mt-4">
-                ¿Ya tienes cuenta? <a href="#" class="text-teal-600 font-semibold hover:underline">Inicia Sesión</a>
-            </p>
         </form>
     </div>
 </section>
