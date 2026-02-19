@@ -14,15 +14,15 @@ export class FormularioCuenta {
   private fb = inject(FormBuilder);
 
   reglaEmail = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
-  reglaPassword = '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$';
+  //reglaPassword = '^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$';
 
   formCuenta = this.fb.group(
     {
       email: ['', [Validators.required, Validators.pattern(this.reglaEmail)]],
-      password: ['', [Validators.required, Validators.pattern(this.reglaPassword)]],
-      repeatPassword: ['', [Validators.required]]
-    },
-    { validators: this.validarClaves },
+      comentario: ['', [Validators.required]]
+      //password: ['', [Validators.required, Validators.pattern(this.reglaPassword)]],
+      //repeatPassword: ['', [Validators.required]]
+    }
   );
 
   //Método para la validacion
@@ -45,8 +45,29 @@ export class FormularioCuenta {
 
   enviarRegistro() {
     if (this.formCuenta.valid) {
-      console.log(`La cuenta creada es ${this.formCuenta}.value`);
-      alert('✨ ¡Registro Exitoso! Bienvenido a la familia Visual. 🐾');
+      //URLSearchParams crea un objeto especial que formatea los datos del formulario como un url (email%juanito@gmail.com...)
+      const contenido = new URLSearchParams();
+      contenido.set('form-name', 'contacto');
+      contenido.set('email', this.formCuenta.value.email ?? '');
+      contenido.set('comentario', this.formCuenta.value.comentario ?? '');
+
+      //Promesa: Funcion especial de JS que se usa para hacer peticiones http a traves de la red
+      fetch('/', {
+        method: 'POST',
+        //Indicar los datos que se van a enviar esta codificados como una URL no como un JSON
+        headers: { 'Content-Type': "application/x-www-form-urlencoded" },
+        //Convertir todo el objeto a una cadena de texto lista para enviarse 
+        body: contenido.toString()
+      })
+        //Si la promesa se cumple 
+        .then(() => {
+          alert("Enviado con éxito");
+          this.formCuenta.reset();
+        })
+        //Si la promesa no se cumple 
+        .catch((error) => 
+          alert("No se pueden enviar los datos" + error));
     }
   }
 }
+

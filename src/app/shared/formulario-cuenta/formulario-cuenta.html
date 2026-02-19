@@ -29,12 +29,12 @@
             </div>
 
             <div>
-                <label class="block text-sm font-medium text-gray-700">Contraseña</label>
-                <input formControlName="password" type="password" placeholder="••••••••" class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm shadow-sm placeholder-gray-400
-                    focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all">
-                    @if (formCuenta.get('password')?.invalid && formCuenta.get('password')?.touched) {
-                    <p class="mt-2 text-sm text-red-600"> 
-                        Debe tener mínimo 8 caracteres, letras y números
+                <label class="block text-sm font-medium text-gray-700">Your message</label>
+                <textarea formControlName="comentario" type="comentario" id="comentario" placeholder="hola mundo" cols="10" rows="10" class="mt-1 block w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm shadow-sm placeholder-gray-400
+                    focus:outline-none focus:border-teal-500 focus:ring-1 focus:ring-teal-500 transition-all"></textarea>
+                    @if (formCuenta.get('comentario')?.invalid && formCuenta.get('comentario')?.touched) {
+                    <p class="mt-2 text-sm text-red-600">
+                        Su comentario es requerido
                     </p>
                 }
             </div>
