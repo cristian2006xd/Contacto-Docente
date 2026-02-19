@@ -1,8 +1,10 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnInit } from '@angular/core';
 import { UsuarioService } from '../../services/usuario-service';
 import { Usuario } from '../../models/usuario';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth-service';
+import { Router } from '@angular/router';
+import { Salir } from '../../guards/outh-guard';
 
 @Component({
   selector: 'app-formulario',
@@ -10,11 +12,14 @@ import { AuthService } from '../../services/auth-service';
   templateUrl: './formulario.html',
   styleUrl: './formulario.css',
 })
-export class Formulario {
+export class Formulario implements OnInit, Salir {
 
   private servicioUsuario = inject(UsuarioService);
 
   public servicioAuth = inject(AuthService);
+
+  //CAMBIO CANDEACTIVATE
+  private router = inject(Router);
 
   listaUsuarios = signal<Usuario[]>([]);
 
@@ -39,19 +44,41 @@ export class Formulario {
     })
   }
 
+  finalizarYSalir() {
+    this.obtenerUsuarios();
+    this.resetear();
+    this.router.navigate(['/'])
+  }
+
+  permitirSalir(): boolean {
+    const datosIntroducidos =
+      (this.nuevoUsuario.name?.trim() ?? '') !== '' ||
+      (this.nuevoUsuario.email?.trim() ?? '') !== '' ||
+      (this.nuevoUsuario.name?.trim() ?? '') !== '';
+
+    if (this.editando || datosIntroducidos) {
+      return confirm('Tienes datos sin guardar en el formulario. ¿Deseas salir de todas formas?')
+    }
+    return true;
+  }
+
   //Método guardar
   guardarUsuario() {
-    if (this.editando && this.nuevoUsuario.id) {
-      this.servicioUsuario.putUsuario(this.nuevoUsuario.id, this.nuevoUsuario).subscribe(() => {
-        this.obtenerUsuarios();
-        this.resetear();
-      });
-    }
-    else {
-      this.servicioUsuario.postUsuario(this.nuevoUsuario).subscribe(() => {
-        this.obtenerUsuarios();
-        this.resetear();
-      });
+    const accion = this.editando ? 'Actualizar' : 'Registrar';
+    if (confirm(`Estas seguro de que deseas ${accion} a este usuario`)) {
+
+      if (this.editando && this.nuevoUsuario.id) {
+        this.servicioUsuario.putUsuario(this.nuevoUsuario.id, this.nuevoUsuario).subscribe(() => {
+          this.obtenerUsuarios();
+          this.resetear();
+        });
+      }
+      else {
+        this.servicioUsuario.postUsuario(this.nuevoUsuario).subscribe(() => {
+          this.obtenerUsuarios();
+          this.resetear();
+        });
+      }
     }
   }
 

@@ -7,13 +7,14 @@ import { Usuarios } from './features/usuarios/usuarios';
 import { FormularioCuenta } from './shared/formulario-cuenta/formulario-cuenta';
 import { Login } from './shared/login/login';
 import { authGuard } from './guards/auth-guard';
+import { outhGuardGuard } from './guards/outh-guard';
 
 export const routes: Routes = [
     { path: '', component: Home },
     { path: 'acerca', component: Acerca },
     { path: 'consultas', component: Consultas },
     { path: 'mascotas', component: Mascotas },
-    { path: 'usuarios', component: Usuarios, canActivate: [authGuard] },
+    { path: 'usuarios', component: Usuarios, canActivate: [authGuard], canDeactivate: [outhGuardGuard] },
     { path: 'cuenta', component: FormularioCuenta },
     { path: 'login', component: Login }
 
